@@ -1,0 +1,72 @@
+server:
+  port: 8010
+  tomcat:
+    uri-encoding: UTF-8
+  max-http-header-size: 8KB
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    password: your_redis_password
+  #rabbitmq
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        concurrency: 5
+        prefetch: 10
+        retry:
+          enabled: true   # 允许消息消费失败的重试
+          max-attempts: 1   # 消息最多消费次数3次
+          initial-interval: 600000    # 消息多次消费的间隔30秒
+  datasource:
+    url: jdbc:p6spy:mysql://localhost:3306/mocard_dev?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    username: your_db_username
+    password: your_db_password
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      validationQuery: SELECT 1
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+chatgpt:
+  apiKey: your_openai_api_key
+  apiHost: https://api.openai.com/
+
+wx:
+  mp:
+    host: localhost
+    port: 8091
+
+
+logging:
+  config: classpath:logback-spring.xml
+  # 日志文件路径, 部署及运行时可改写以覆盖
+  file-location: logs
+
+jwt:
+  secret: your_jwt_secret_key
+  expirt: 86400
+  authorization: access-token
+
+useagelimit:
+    count: 10
+
+apple:
+  verifyReceipt:
+    testUrl: https://sandbox.itunes.apple.com/verifyReceipt
+    url: https://buy.itunes.apple.com/verifyReceipt
+    password: your_apple_shared_secret
+
+

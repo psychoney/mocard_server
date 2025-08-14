@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: @profiles.active@
+  application:
+    name: mocard-server
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
